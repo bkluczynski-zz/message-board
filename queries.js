@@ -30,7 +30,7 @@ getMessages = (req, res, next) => {
 createMessage = (req, res, next) => {
   //don't expect any results, therefore using none
   req.body.score = parseInt(req.body.score);
-  db.none('insert into messages(content, score)' + 'values(${content}, ${score})', req.body)
+  db.none('insert into messages(content, score, timestamps)' + 'values(${content}, ${score}, ${timestamps})', req.body)
     .then(() => {
       res.status(200)
         .json({
@@ -43,7 +43,39 @@ createMessage = (req, res, next) => {
     });
 }
 
+vote = (req, res, next) => {
+  let messageId = parseInt(req.params.id);
+  let option = req.body.options;
+  db.task(t => {
+    return t.one ('select * from messages where id = $1', messageId)
+          .then(data => {
+            let score = data.score
+            parseInt(score);
+            switch(option){
+              case "upVote":
+              score = score + 1
+              break;
+              case "downVote":
+              score = score - 1
+              break;
+            }
+            return t.none('update messages set score=$1 where id=$2',[ score, messageId])
+          });
+        })
+        .then(() => {
+          res.status(200)
+          .json({
+            status: 'success',
+            message: 'updated message'
+          });
+        })
+        .catch((err) => {
+          return next(err)
+        })
+      }
+
 module.exports = {
   getMessages: getMessages,
   createMessage: createMessage,
+  vote:vote,
 }
