@@ -27,6 +27,23 @@ getMessages = (req, res, next) => {
     })
 }
 
+createMessage = (req, res, next) => {
+  //don't expect any results, therefore using none
+  req.body.score = parseInt(req.body.score);
+  db.none('insert into messages(content, score)' + 'values(${content}, ${score})', req.body)
+    .then(() => {
+      res.status(200)
+        .json({
+          status: 'success',
+          message: 'created one message'
+        });
+    })
+    .catch((err) => {
+      return next(err);
+    });
+}
+
 module.exports = {
   getMessages: getMessages,
+  createMessage: createMessage,
 }

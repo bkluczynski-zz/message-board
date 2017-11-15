@@ -4,5 +4,6 @@ const db = require('../queries');
 
 /* GET home page. */
 router.get('/api/messages', db.getMessages);
+router.post('/api/messages', db.createMessage);
 
 module.exports = router;
