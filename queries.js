@@ -59,7 +59,7 @@ vote = (req, res, next) => {
               score = score - 1
               break;
             }
-            return t.none('update messages set score=$1 where id=$2',[ score, messageId])
+            return t.none('update messages set score=$1', score)
           });
         })
         .then(() => {
