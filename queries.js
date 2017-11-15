@@ -3,11 +3,11 @@ const promise = require('bluebird');
 
 //initializing with blue bird promise
 const options = {
-  promiseLab: promise
+  promiseLib: promise
 }
 //options are required
 const pgp = require('pg-promise')(options);
-const connectionString = 'postgres://localhost:5432/messages';
+const connectionString = 'postgres://localhost:5432/messages_board';
 const db = pgp(connectionString);
 
 getMessages = (req, res, next) => {
