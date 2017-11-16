@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import CreateMessage from './components/CreateMessage'
 import { Icon,Button } from 'semantic-ui-react'
+import { getFullDate } from './utils/helpers'
 import * as MessagesAPI from './utils/MessagesAPI'
 
 
@@ -13,7 +14,7 @@ class App extends Component {
 
     getMessages = () => {
       MessagesAPI.getAll()
-      .then(messages => this.setState({messages}))
+      .then(messages => this.setState({messages : this.sortByDates(messages)}))
     }
 
     componentDidMount(){
@@ -39,6 +40,14 @@ class App extends Component {
       this.setState({messages})
     }
 
+    sortByDates = (items) => {
+      return items.sort((a,b) => {
+        return new Date(a.timestamps).getTime() - new Date(b.timestamps).getTime()
+      }).reverse()
+    }
+
+
+
 
     render() {
       console.log("messages", this.state.messages)
@@ -48,7 +57,7 @@ class App extends Component {
         <CreateMessage submit={this.createMessage} />
         { this.state.messages && this.state.messages.map(message =>
           (
-          <div style={messageStyle} key={message.id}>{`${message.content} : ${message.timestamps}, current scoreVote: ${message.score}`}
+          <div style={messageStyle} key={message.id}>{`${message.content} :${getFullDate(message.timestamps)}, current scoreVote: ${message.score}`}
           <div>
             <Button onClick={() => this.voteMessage(message.id, "upVote")}>
               <Icon name="thumbs up"/>

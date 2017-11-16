@@ -8,3 +8,7 @@ export function dateFormatter(timestamps){
 
     return date
 }
+
+export function getFullDate(dateString){
+  return new Date(dateString.replace(' ', 'T'));
+}
