@@ -3,7 +3,7 @@ import './App.css';
 import CreateMessage from './components/CreateMessage'
 import {getFullDate} from './utils/helpers'
 import * as MessagesAPI from './utils/MessagesAPI'
-import VotingComponent from './components/VotingComponent'
+import DisplayMessage from './components/DisplayMessage'
 
 class App extends Component {
 
@@ -45,23 +45,24 @@ class App extends Component {
   }
 
   render() {
-    console.log("messages", this.state.messages)
     return (<div className="App">
-      <h1>Messages</h1>
+      <h1 style={{position: 'relative', float: 'right', marginRight: '10px'}}>Board of messages</h1>
       <CreateMessage submit={this.createMessage}/> {
-        this.state.messages && this.state.messages.map(message => (<div style={messageStyle} key={message.id}>{`${message.content} :${getFullDate(message.timestamps)}, current scoreVote: ${message.score}`}
-          <VotingComponent message={message} voteMessage={this.voteMessage}/>
+        this.state.messages && this.state.messages.map(message => (<div key={message.id}>
+          <DisplayMessage message={message} getFullDate={getFullDate} style={messageStyle} voteMessage={this.voteMessage}/>
         </div>))
       }
-    </div>);
+    </div>)
   }
+
 }
 
 const messageStyle = {
   fontSize: '15px',
   padding: '30px',
   margin: '10px',
-  border: '2px solid blue'
+  border: '2px solid blue',
+  textAlign: 'left',
 }
 
 export default App;
