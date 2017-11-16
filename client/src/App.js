@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
@@ -23,12 +22,20 @@ class App extends Component {
         <h1>Messages</h1>
         {this.state.messages.map(message =>
           (
-          <div style={{padding: 30}} key={message.id}>{`${message.content} : ${message.timestamps}`}</div>
+          <div style={messageStyle} key={message.id}>{`${message.content} : ${message.timestamps}`}</div>
           )
         )}
       </div>
     );
   }
+}
+
+const messageStyle = {
+  fontSize: '15px',
+  padding: '30px',
+  margin: '10px',
+  textAlign: 'center',
+  border: '2px solid blue'
 }
 
 export default App;
