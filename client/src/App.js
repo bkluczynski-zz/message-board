@@ -4,6 +4,7 @@ import CreateMessage from './components/CreateMessage'
 import {getFullDate} from './utils/helpers'
 import * as MessagesAPI from './utils/MessagesAPI'
 import DisplayMessage from './components/DisplayMessage'
+import fetch from 'isomorphic-fetch'
 
 class App extends Component {
 

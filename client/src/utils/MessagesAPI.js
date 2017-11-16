@@ -1,6 +1,8 @@
 import {
   dateFormatter
 } from './helpers'
+import fetch from 'isomorphic-fetch'
+
 
 const api = "http://localhost:3000"
 
