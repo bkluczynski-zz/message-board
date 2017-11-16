@@ -1,10 +1,12 @@
+/*jshint esversion: 6 */
+
 //using bluebird as a faster alternative to es6 promises
 const promise = require('bluebird');
 
 //initializing with blue bird promise
 const options = {
   promiseLib: promise
-}
+};
 //options are required
 const pgp = require('pg-promise')(options);
 const connectionString = 'postgres://localhost:5432/messages_board';
@@ -24,8 +26,8 @@ getMessages = (req, res, next) => {
     })
     .catch((err) => {
       return next(err);
-    })
-}
+    });
+};
 
 createMessage = (req, res, next) => {
   //don't expect any results, therefore using none
@@ -41,25 +43,26 @@ createMessage = (req, res, next) => {
     .catch((err) => {
       return next(err);
     });
-}
+};
 
 vote = (req, res, next) => {
   let messageId = parseInt(req.params.id);
   let option = req.body.options;
+  //task takes a multiple query
   db.task(t => {
     return t.one ('select * from messages where id = $1', messageId)
           .then(data => {
-            let score = data.score
+            let score = data.score;
             parseInt(score);
             switch(option){
               case "upVote":
-              score = score + 1
+              score = score + 1;
               break;
               case "downVote":
-              score = score - 1
+              score = score - 1;
               break;
             }
-            return t.none('update messages set score=$1 where id=$2',[ score, messageId])
+            return t.none('update messages set score=$1 where id=$2',[ score, messageId]);
           });
         })
         .then(() => {
@@ -70,12 +73,12 @@ vote = (req, res, next) => {
           });
         })
         .catch((err) => {
-          return next(err)
-        })
-      }
+          return next(err);
+        });
+      };
 
 module.exports = {
   getMessages: getMessages,
   createMessage: createMessage,
   vote:vote,
-}
+};
