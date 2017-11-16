@@ -31,6 +31,7 @@ getMessages = (req, res, next) => {
 
 createMessage = (req, res, next) => {
   //don't expect any results, therefore using none
+  console.log("body request is", req.body);
   req.body.score = parseInt(req.body.score);
   db.none('insert into messages(content, score, timestamps)' + 'values(${content}, ${score}, ${timestamps})', req.body)
     .then(() => {

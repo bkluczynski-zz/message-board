@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
+import CreateMessage from './components/CreateMessage'
+import { dateFormatter } from './utils/helpers'
 
 class App extends Component {
 
@@ -16,10 +18,26 @@ class App extends Component {
         })
       }
 
+      createMessage = (content) => {
+            fetch('/api/messages', {
+              headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+              },
+              method: 'POST',
+              body: JSON.stringify({
+                content: content,
+                timestamps: dateFormatter(new Date()),
+                score: 0
+              })
+              })
+              .then(x => console.log('success', x)).catch((err) => console.error('fail', err));
+      }
     render() {
     return (
       <div className="App">
         <h1>Messages</h1>
+        <CreateMessage submit={this.createMessage} />
         {this.state.messages.map(message =>
           (
           <div style={messageStyle} key={message.id}>{`${message.content} : ${message.timestamps}`}</div>
