@@ -54,7 +54,6 @@ class App extends Component {
       }
     </div>)
   }
-
 }
 
 const messageStyle = {
