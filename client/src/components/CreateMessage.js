@@ -13,8 +13,8 @@ class CreateMessage extends Component {
 
   render() {
     return (<form style={inputField} onSubmit={() => this.props.submit(this.state.content)}>
-        <textarea className="flashy-background"  style={textArea} value={this.state.content} onChange={this.handleChange}/>
-        <div style={{marginTop: '8px'}}><Input type="submit"/></div>
+        <textarea id="inputField" className="flashy-background"  style={textArea} value={this.state.content} onChange={this.handleChange}/>
+        <div style={{marginTop: '8px'}}><Input className="submit-button" type="submit"/></div>
     </form>)
   }
 }

@@ -4,7 +4,6 @@ import CreateMessage from './components/CreateMessage'
 import {getFullDate} from './utils/helpers'
 import * as MessagesAPI from './utils/MessagesAPI'
 import DisplayMessage from './components/DisplayMessage'
-import fetch from 'isomorphic-fetch'
 
 class App extends Component {
 
@@ -46,7 +45,7 @@ class App extends Component {
   }
 
   render() {
-    return (<div className="App">
+    return (<div className="App messages_board">
       <h1 style={{position: 'relative', float: 'right', marginRight: '10px'}}>Board of messages</h1>
       <CreateMessage submit={this.createMessage}/> {
         this.state.messages && this.state.messages.map(message => (<div key={message.id}>
