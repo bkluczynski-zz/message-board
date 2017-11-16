@@ -3,16 +3,28 @@ import logo from './logo.svg';
 import './App.css';
 
 class App extends Component {
-  render() {
+    state = {
+      messages: []
+    }
+
+    componentDidMount(){
+      fetch('/api/messages')
+        .then(res => res.json())
+        .then(messages => {
+          const data = messages.data
+          this.setState({ messages: data})
+        })
+      }
+
+    render() {
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>Messages</h1>
+        {this.state.messages.map(message =>
+          (
+          <div key={message.id}>{message.content}</div>
+          )
+        )}
       </div>
     );
   }
