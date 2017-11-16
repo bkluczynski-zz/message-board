@@ -21,6 +21,7 @@ export const vote = (option, id) =>
     body: JSON.stringify({ options: option })
   })
   .then(res => res.json())
+  .then(data => data.data)
 
 
 export const create = (content) => {

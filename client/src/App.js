@@ -26,6 +26,17 @@ class App extends Component {
 
     voteMessage = (id, option) => {
       MessagesAPI.vote(option, id)
+      const { messages } = this.state;
+      messages.filter(message => message.id === id).map(message => {
+        if (option === 'upVote'){
+          message.score += 1;
+          return message;
+        } else {
+          message.score -= 1;
+          return message;
+        }
+      })
+      this.setState({messages})
     }
 
 
