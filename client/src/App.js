@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 import './App.css';
-import CreateMessage from './components/CreateMessage'
+import CreateMessage from './components/CreateMessage/index'
 import {getFullDate} from './utils/helpers'
 import * as MessagesAPI from './utils/MessagesAPI'
-import DisplayMessage from './components/DisplayMessage'
+import DisplayMessage from './components/DisplayMessage/index'
 
 class App extends Component {
 
