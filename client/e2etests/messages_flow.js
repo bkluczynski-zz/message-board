@@ -1,10 +1,16 @@
 const expect = require('chai').expect;
 const db = require('../../queries');
+const helper = require('./helpers');
+
 
 describe('Message App', () => {
+  let message;
+  let thumbs;
 
   beforeEach(() => {
     db.createDatabase()
+    browser.url('http://localhost:3000/');
+    message = 'Just a random message';
   })
 
   afterEach(() => {
@@ -12,43 +18,31 @@ describe('Message App', () => {
   })
 
   it('Should load with the right title', () => {
-    browser.url('http://localhost:3000/');
     const actualTitle = browser.getTitle();
     expect(actualTitle).to.eql('Board of messages');
   });
 
   it('Should allow me to create a message', () => {
-    const message = 'This is a very interesting message';
-    browser.url('http://localhost:3000/');
-    browser.element('#inputField').setValue(message);
-    browser.click('.submit-button');
+    helper.submitMessage(message);
     const actual = browser.element('.messages_board div[style*="padding-bottom"]').getText();
-    expect(actual).to.eql(message)
-  })
+    expect(actual).to.eql(message);
+  });
 
   it('Should allow any user to upVote any message and see the counter being increased', () => {
-    const thumbs = 'Thumb awesomness: 1';
-    const message = 'Just a random message';
-    browser.url('http://localhost:3000/');
-    browser.element('#inputField').setValue(message);
-    browser.click('.submit-button');
-    browser.click('#voting :nth-child(1)');
-    const actual = browser.element('.messages_board div:nth-child(3) div:nth-child(3)').getText();
+    thumbs = 'Thumb awesomness: 1';
+    helper.submitMessage(message);
+    helper.upVote();
+    const actual = helper.getPointsOfAwesomness();
     expect(actual).to.eql(thumbs);
-  })
+  });
 
   it('Should allow any user to downVote any message and see the counter being decreased', () => {
-    const thumbs = 'Thumb awesomness: -1';
-    const message = 'Just a random message';
-    browser.url('http://localhost:3000/');
-    browser.element('#inputField').setValue(message);
-    browser.click('.submit-button');
-    browser.click('#voting :nth-child(2)');
-    const actual = browser.element('.messages_board div:nth-child(3) div:nth-child(3)').getText();
+    thumbs = 'Thumb awesomness: -1';
+    helper.submitMessage(message);
+    helper.downVote();
+    const actual = helper.getPointsOfAwesomness();
     expect(actual).to.eql(thumbs);
-  })
-
-
+  });
 
 
 

@@ -20,6 +20,7 @@ class App extends Component {
   }
 
   createMessage = (content) => {
+    debugger;
     MessagesAPI.create(content)
   }
 
