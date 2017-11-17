@@ -4,7 +4,7 @@ import { Input } from 'semantic-ui-react'
 class CreateMessage extends Component {
 
   state = {
-    content: 'Please type your message'
+    content: ''
   }
 
   handleChange = (event) => {
@@ -13,7 +13,7 @@ class CreateMessage extends Component {
 
   render() {
     return (<form style={inputField} onSubmit={() => this.props.submit(this.state.content)}>
-        <textarea id="inputField" className="flashy-background"  style={textArea} value={this.state.content} onChange={this.handleChange}/>
+        <textarea id="inputField" className="flashy-background"  style={textArea} value={this.state.content} onChange={this.handleChange} required/>
         <div style={{marginTop: '8px'}}><Input className="submit-button" type="submit"/></div>
     </form>)
   }

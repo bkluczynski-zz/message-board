@@ -7,14 +7,16 @@ describe('Message App', () => {
   let message;
   let thumbs;
 
+
   beforeEach(() => {
-    db.createDatabase()
+    db.dropTable();
+    db.createTable();
     browser.url('http://localhost:3000/');
     message = 'Just a random message';
   })
 
   afterEach(() => {
-    db.dropDatabase()
+    db.dropTable();
   })
 
   it('Should load with the right title', () => {
@@ -43,7 +45,5 @@ describe('Message App', () => {
     const actual = helper.getPointsOfAwesomness();
     expect(actual).to.eql(thumbs);
   });
-
-
 
 });
