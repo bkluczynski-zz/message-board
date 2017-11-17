@@ -10,7 +10,7 @@ To start the app follow the instruction below:
 
 - clone this repository
 - in the root directory install all dependencies for backend `npm install`
-- setup your database and table with one message as an example `psql -f messages_board.sql`
+- setup your database and table with one message as an example `psql -f db/messages_board.sql`
 - run the app `npm start`
 - open a new tab on your terminal and `cd client`
 - install frontend dependencies `npm install`
