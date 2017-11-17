@@ -1,5 +1,5 @@
 const expect = require('chai').expect;
-const db = require('../../queries');
+const db = require('../../db/queries');
 const helper = require('./helpers');
 
 
@@ -7,9 +7,7 @@ describe('Message App', () => {
   let message;
   let thumbs;
 
-
   beforeEach(() => {
-    db.dropTable();
     db.createTable();
     browser.url('http://localhost:3000/');
     message = 'Just a random message';
