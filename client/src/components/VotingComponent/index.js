@@ -12,5 +12,4 @@ const VotingComponent = ({voteMessage, message}) => {
   )
 
 }
-
 export default VotingComponent;

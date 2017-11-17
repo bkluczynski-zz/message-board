@@ -7,11 +7,15 @@ describe('VotingComponent', () => {
   let component;
 
   beforeEach(() => {
-    component = shallow(<VotingComponent/>);
+    component = mount(<VotingComponent/>);
   })
 
   it('should render properly', () => {
     expect(component.exists()).toEqual(true);
   });
+
+  it('should have two buttons', () => {
+    expect(component.find('#voting').children().length).toEqual(2)
+  })
 
 })

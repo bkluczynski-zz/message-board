@@ -12,4 +12,5 @@ describe("VoteButton", () => {
   it('should render a button', () => {
     expect(component.find('.vote').length).toEqual(1);
   });
+
 });
