@@ -22,11 +22,10 @@ getMessages = (req, res, next) => {
   });
 };
 
-dropDatabase = () => {
-  db.none('drop table messages')
+dropTable = () => {
+  db.none('drop table if exists messages')
 }
-
-createDatabase = () => {
+createTable = () => {
   db.none('create table messages(id SERIAL PRIMARY KEY, content VARCHAR, score INTEGER, timestamps TIMESTAMP)')
 }
 
@@ -70,6 +69,6 @@ module.exports = {
   getMessages: getMessages,
   createMessage: createMessage,
   vote: vote,
-  dropDatabase:dropDatabase,
-  createDatabase:createDatabase,
+  dropTable:dropTable,
+  createTable:createTable,
 };
