@@ -27,11 +27,10 @@ describe('CreateMessage component', () => {
   });
 
   it('Should call the submit function when clicked', () => {
-    const submitMock = jest.fn();
     const component = mount(<CreateMessage submit={submitMock} />);
     expect(submitMock.mock.calls.length).toEqual(0);
     component.find('form').simulate('submit');
     expect(submitMock.mock.calls.length).toEqual(1);
   })
-  
+
 });
