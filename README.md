@@ -9,6 +9,15 @@ The backend has been built on Node/Express, PSQL with pg-promise library to hand
 To start the app follow the instruction below: 
 
 - clone this repository
+- make sure you have your postgresql setup 
+
+- if not, on mac do `brew install postgresql`
+- to have launched start mysql at login: `ln -sfv /usr/local/opt/postgresql/*.plist ~/Library/LaunchAgents`
+- then to load mysql now: `launchctl load ~/Library/LaunchAgents/homebrew.mxcl.postgresql.plist`
+- you can check your installation by running `psql`
+- create db to login to psql without needing to specify what db to connect to: `psql postgres`
+- `create database "your_user_name_here";`
+
 - in the root directory install all dependencies for backend `npm install`
 - setup your database and table with one message as an example `psql -f db/messages_board.sql`
 - run the app `npm start`
